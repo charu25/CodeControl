@@ -7,19 +7,33 @@ app.post('/', function(req, res) {
   //res.send('You sent the name "' + req.body.name + '".');
   var username=req.body.name;
   var password=req.body.pass;
-  var MongoClient = require('mongodb').MongoClient
-    , format = require('util').format;
+  var Db = require('mongodb').Db,
+    MongoClient = require('mongodb').MongoClient,
+    Server = require('mongodb').Server,
+    ReplSetServers = require('mongodb').ReplSetServers,
+    ObjectID = require('mongodb').ObjectID,
+    Binary = require('mongodb').Binary,
+    GridStore = require('mongodb').GridStore,
+    Grid = require('mongodb').Grid,
+    Code = require('mongodb').Code,
+    BSON = require('mongodb').pure().BSON,
+    assert = require('assert');
+  
+  var mongoclient = new MongoClient(new Server("localhost", 27017), {native_parser: true});
 
-  MongoClient.connect('mongodb://127.0.0.1:3000/mydb', function(err, db) {
-      if(err) throw err;
+  // Open the connection to the server
+  mongoclient.open(function(err, mongoclient) {
 
+  
+  
+  var db = mongoclient.db("mydb");
   var collection = db.collection('testData');
-  console.log(collection.findOne({name:username}));
 
   
   collection.findOne({name:username}).pass;
   if(pass==password){
     res.send("yola");
+    console.log("yo");
   }
    
     });
