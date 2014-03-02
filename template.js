@@ -30,7 +30,7 @@ app.get('/robot',function(req,res){
         elo=results[0]['elo'];
         rank=results[0]['rank'];
         }
-
+        //updates page content
         var i=0;
         $('div.modal-body').empty();
         while(i<robots.length){
